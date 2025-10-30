@@ -32,7 +32,7 @@ app.use(
         keys: [process.env.SESSION_SECRET || "secretkey"],
         maxAge: 24 * 60 * 60 * 1000,
         sameSite: "true",
-        secure: false, 
+        secure: true, 
     })
 );
 
