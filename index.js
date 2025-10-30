@@ -14,8 +14,15 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
+        origin: [
+            "http://localhost:5173",
+            "http://localhost:3000", 
+            "https://image-search-app-client.vercel.app",
+            process.env.CLIENT_ORIGIN
+        ].filter(Boolean),
         credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
     })
 );
 
@@ -24,8 +31,9 @@ app.use(
         name: "session",
         keys: [process.env.SESSION_SECRET || "secretkey"],
         maxAge: 24 * 60 * 60 * 1000,
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        secure: process.env.NODE_ENV === "production",
+        sameSite: "none",
+        secure: false,
+        httpOnly: false,
     })
 );
 
