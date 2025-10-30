@@ -6,10 +6,20 @@ const router = express.Router();
 const CLIENT_URL = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 
 router.get('/status', (req, res) => {
-    console.log(req.user);
+    console.log('=== AUTH STATUS CHECK ===');
+    console.log('- User exists:', !!req.user);
+    console.log('- User ID:', req.user?.id);
+    console.log('- Session ID:', req.sessionID);
+    console.log('- Session data:', JSON.stringify(req.session, null, 2));
+    console.log('- Request cookies:', req.get('Cookie'));
+    console.log('- Origin:', req.get('Origin'));
+    console.log('- Referer:', req.get('Referer'));
+    
     if (req.user) {
+        console.log('User authenticated, returning success');
         res.json({ ok: true, user: req.user });
     } else {
+        console.log('No user found, returning failure');
         res.json({ ok: false });
     }
 });
