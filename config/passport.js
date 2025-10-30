@@ -45,7 +45,6 @@ passport.use(new GitHubStrategy({
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         let user = await User.findOne({ provider: 'github', providerId: profile.id });
-        console.log('GitHub user:', user);
         if (!user) {
             user = await User.create({
                 provider: 'github',
