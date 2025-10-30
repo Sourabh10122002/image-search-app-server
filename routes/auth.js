@@ -7,10 +7,23 @@ const CLIENT_URL = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 
 router.get('/status', (req, res) => {
     if (req.user) {
-        res.json({ ok: true, user: req.user });
+        res.json({ user: req.user });
     } else {
         res.json({ ok: false });
     }
+});
+
+router.get('/debug', (req, res) => {
+    res.json({
+        session: req.session,
+        user: req.user,
+    });
+});
+
+router.get('/logout', (req, res) => {
+    req.logout(() => { });
+    req.session = null;
+    res.json({ ok: true });
 });
 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
