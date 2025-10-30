@@ -6,6 +6,7 @@ const router = express.Router();
 const CLIENT_URL = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 
 router.get('/status', (req, res) => {
+    console.log(req.user);
     if (req.user) {
         res.json({ ok: true, user: req.user });
     } else {
