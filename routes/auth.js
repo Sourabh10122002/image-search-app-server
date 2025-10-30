@@ -7,7 +7,7 @@ const CLIENT_URL = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 
 router.get('/status', (req, res) => {
     if (req.user) {
-        res.json({ user: req.user });
+        res.json({ ok: true, user: req.user });
     } else {
         res.json({ ok: false });
     }
