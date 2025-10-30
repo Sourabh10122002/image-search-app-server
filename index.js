@@ -31,9 +31,8 @@ app.use(
         name: "session",
         keys: [process.env.SESSION_SECRET || "secretkey"],
         maxAge: 24 * 60 * 60 * 1000,
-        sameSite: "none",
-        secure: false,
-        httpOnly: false,
+        // sameSite: "none",
+        // secure: false, 
     })
 );
 
